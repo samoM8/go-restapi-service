@@ -1,4 +1,4 @@
-# Binaries for programs and plugins
+#lahko se probam da sam *.go file kopiram# Binaries for programs and plugins
 *.exe
 *.exe~
 *.dll
@@ -13,3 +13,5 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+.idea
