@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/go-pg/pg/v10"
+	"github.com/go-restapi-service/controllers"
 	"log"
 	"os"
 )
@@ -21,6 +22,9 @@ func Connect() *pg.DB {
 	}
 
 	log.Printf("Connected to db")
+
+	controllers.CreateGroupTable(db)
+	controllers.InitializeDB(db)
 
 	return db
 }
