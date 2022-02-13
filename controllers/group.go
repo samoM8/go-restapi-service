@@ -37,7 +37,7 @@ func GetAllGroups(c *gin.Context) {
 	err := db.Model(&groups).Select()
 
 	if err != nil {
-		log.Printf("Error while getting all todos, Reason: %v\n", err)
+		log.Printf("Error while getting all groups, Reason: %v\n", err)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status":  http.StatusInternalServerError,
 			"message": "Something went wrong",
@@ -144,7 +144,7 @@ func EditGroup(c *gin.Context) {
 	return
 }
 
-// DeleteGroup Deletes a group
+// DeleteGroup Deletes a group by id
 func DeleteGroup(c *gin.Context) {
 	groupId := c.Param("groupId")
 	group := &models.Group{ID: groupId}
