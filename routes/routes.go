@@ -10,11 +10,11 @@ func Routes(router *gin.Engine) {
 	router.GET("/", welcome)
 
 	// Users
-	router.GET("users")
-	router.GET("users/:userId")
-	router.POST("users")
-	router.PUT("users/:userId")
-	router.DELETE("users/:userId")
+	router.GET("users", controllers.GetAllUsers)
+	router.GET("users/:userId", controllers.GetSingleUser)
+	router.POST("users", controllers.CreateUser)
+	router.PUT("users/:userId", controllers.EditUser)
+	router.DELETE("users/:userId", controllers.DeleteUser)
 
 	//Groups
 	router.GET("groups", controllers.GetAllGroups)
