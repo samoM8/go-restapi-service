@@ -5,11 +5,16 @@ import (
 	"github.com/go-restapi-service/config"
 	"github.com/go-restapi-service/routes"
 	"log"
+	"os"
 )
 
 func main() {
 	//Connect to db
 	config.Connect()
+
+	if os.Getenv("ENV") == "docker" {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
 	//Init routes
 	router := gin.Default()

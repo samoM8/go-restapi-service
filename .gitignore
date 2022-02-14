@@ -1,4 +1,4 @@
-#lahko se probam da sam *.go file kopiram# Binaries for programs and plugins
+# Binaries for programs and plugins
 *.exe
 *.exe~
 *.dll
