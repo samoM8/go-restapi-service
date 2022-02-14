@@ -1,0 +1,8 @@
+*.exe
+*.test
+.idea
+docker-compose*
+.dockerignore
+.git
+.gitignore
+README.md
