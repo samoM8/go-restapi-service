@@ -1,0 +1,325 @@
+basePath: /
+swagger: "2.0"
+consumes:
+- application/json
+info:
+  description: Documentation for Group and Users API
+  title: Group and Users API
+  version: 1.0.0
+schemes:
+  - http
+tags:
+  - name: Users
+    description: Users
+  - name: Groups
+    description: Groups
+paths:
+  /users:
+    get:
+      summary: Returns a list of users
+      description: Get all users form database
+      tags:
+       - Users
+      responses:
+        "200":
+          description: Succesfull request getting all users
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+              message:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/userResponse"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+    post:
+      summary: Create user
+      description: Create a new user
+      tags:
+        - Users
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/userRequest"
+      responses:
+        "201":
+          description: User created
+          schema:
+            $ref: "#/definitions/success"
+        "400":
+          description: Incorrect parameters
+          schema:
+            $ref: "#/definitions/error"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+  /users/{userId}:
+    parameters:
+      - in: path
+        type: string
+        format: uuid
+        name: userId
+        required: true
+    get:
+      summary: Returns a user
+      description: Get user by user id
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Succesfull request getting user
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+              message:
+                type: string
+              data:
+                $ref: "#/definitions/userResponse"
+        "404":
+          description: User with id does not exist
+          schema:
+            $ref: "#/definitions/error"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+    put:
+      summary: Edit user
+      description: Edit a user with user id
+      tags:
+        - Users
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/userRequest"
+      responses:
+        "200":
+          description: User edited
+          schema:
+            $ref: "#/definitions/success"
+        "400":
+          description: Incorrect parameters
+          schema:
+            $ref: "#/definitions/error"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+    delete:
+      summary: Deletes a user
+      description: Delete user by user id
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Succesfull request deleting user
+          schema:
+            $ref: "#/definitions/success"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+  /groups:
+    get:
+      summary: Returns a list of groups
+      description: Get all groups form database
+      tags:
+        - Groups
+      responses:
+        "200":
+          description: Succesfull request getting all groups
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+              message:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/groupResponse"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+    post:
+      summary: Create group
+      description: Create a new group
+      tags:
+        - Groups
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/groupRequest"
+      responses:
+        "201":
+          description: Group created
+          schema:
+            $ref: "#/definitions/success"
+        "400":
+          description: Incorrect parameters
+          schema:
+            $ref: "#/definitions/error"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+  /groups/{groupId}:
+    parameters:
+      - in: path
+        type: string
+        format: uuid
+        name: groupId
+        required: true
+    get:
+      summary: Returns a group
+      description: Get group by user id
+      tags:
+        - Groups
+      responses:
+        "200":
+          description: Succesfull request getting group
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+              message:
+                type: string
+              data:
+                $ref: "#/definitions/groupResponse"
+        "404":
+          description: Group with id does not exist
+          schema:
+            $ref: "#/definitions/error"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+    put:
+      summary: Edit Group
+      description: Edit a group with user id
+      tags:
+        - Groups
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/groupRequest"
+      responses:
+        "200":
+          description: Group edited
+          schema:
+            $ref: "#/definitions/success"
+        "400":
+          description: Incorrect parameters
+          schema:
+            $ref: "#/definitions/error"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+    delete:
+      summary: Deletes a group
+      description: Delete group by user id
+      tags:
+        - Groups
+      responses:
+        "200":
+          description: Succesfull request deleting group
+          schema:
+            $ref: "#/definitions/success"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/error"
+produces:
+- application/json
+definitions:
+  groupResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: 913614ec-d145-4584-80f7-1029bb8db91c
+      name:
+        type: string
+        example: Group 1
+    required:
+      - id
+  userResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: a1d803a1-e582-4652-82e4-43ff7b3b6854
+      email:
+        type: string
+        example: test@fmail.com
+      password:
+        type: string
+        example: $2a$14$Hsqf2tzGLtg5aUzcZDHXJ.gZ0ofbcnVdZDKsUV4e714qWwyf1y8Kq
+      name:
+        type: string
+        example: Name
+      group_id:
+        type: string
+        example: 913614ec-d145-4584-80f7-1029bb8db91c
+      group:
+        $ref: "#/definitions/groupResponse"
+  groupRequest:
+    type: object
+    properties:
+      name:
+        type: string
+        example: Group 1
+  userRequest:
+    type: object
+    properties:
+      email:
+        type: string
+        example: test@fmail.com
+      password:
+        type: string
+        example: password
+      name:
+        type: string
+        example: Name
+      group_id:
+        type: string
+        example: 913614ec-d145-4584-80f7-1029bb8db91c
+  error:
+    description: Some error happened
+    type: object
+    properties:
+      status:
+        type: number
+        example: 500
+      message:
+        type: string
+        example: Something went wrong
+  success:
+    description: Successful request
+    type: object
+    properties:
+      status:
+        type: number
+        example: 201
+      message:
+        type: string
+        example: Created successfully

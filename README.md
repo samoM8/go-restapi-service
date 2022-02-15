@@ -10,3 +10,6 @@
 
 ## Run with docker compose
     $ docker-compose up
+
+### Swagger UI
+ - http://localhost:8080/docs
